@@ -2,7 +2,7 @@ const FeedbackData = [
     {
       id: 1,
       rating: 10,
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae.',
+      text: 'canım defne güzel defne sen hep güzel hep bitanee...',
     },
     {
       id: 2,
