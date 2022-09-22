@@ -48,7 +48,7 @@ function FeedbackForm() {
   }
 
   return (
-    <Card>
+    <Card key={resetKey}>
         <h2 id="ratingInfo">How would you rate your service with us?</h2>
         <RatingSelect handleChanges={id => setRating(id)}/>
         <form onSubmit={handleSubmit}>

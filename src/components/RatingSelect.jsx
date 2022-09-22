@@ -1,13 +1,13 @@
-import {useState} from "react"
+import {useEffect, useState} from "react"
 
 
 function RatingSelect({handleChanges}) {
 
-  const [selected, setSelected] = useState(10)
+  const [selected, setSelected] = useState(null)
 
   const handleChange = event => {
-    handleChanges(+event.target.value)
     setSelected(+event.target.value)
+    handleChanges(+event.target.value)
   }  
 
   return (
