@@ -1,5 +1,5 @@
 import FeedbackContext from "../context/FeedbackContext"
-import {useContext, useState} from "react"
+import {useContext} from "react"
 
 function FeedbackStats() {
 
