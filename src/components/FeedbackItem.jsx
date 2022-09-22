@@ -12,7 +12,6 @@ function FeedbackItem({feedback, id}) {
     editFeedback(item)
     const element = document.querySelector("#ratingInfo")
     element.scrollIntoView()
-    
   }
 
   return (

@@ -11,7 +11,7 @@ function FeedbackForm() {
   const [text, setText] = useState("")
   const [message, setMessage] = useState("")
   const [rating, setRating] = useState(null)
-  const {addFeedback, feedbackEdit, editFeedback, setFeedbackEdit} = useContext(FeedbackContext)
+  const {addFeedback, feedbackEdit, setFeedbackEdit, updateFeedback} = useContext(FeedbackContext)
 
   const handleChange = event => {
     setText(event.target.value)
@@ -42,15 +42,19 @@ function FeedbackForm() {
   const handleSubmit = event => {
     event.preventDefault()
     if (text.trim().length >= 10 && rating) {
-        const newFeedback = {
-            rating,
-            text
-        }
+      const newFeedback = {
+        rating,
+        text
+      }
+      if(feedbackEdit.edit === true) {
+        updateFeedback(feedbackEdit.item.id, newFeedback)
+      } else {
         addFeedback(newFeedback)
-        setText("")
-        setBtnDisabled(true)
-        setMessage("")
-        setFeedbackEdit({item: {}, edit: false})
+      }
+      setText("")
+      setBtnDisabled(true)
+      setMessage("")
+      setFeedbackEdit({item: {}, edit: false})
     } else if (!rating)
     setMessage("Please rate before submit")
     setRating(null)
