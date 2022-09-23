@@ -24,17 +24,17 @@ export const FeedbackProvider = ({children}) => {
 
     const deleteItem = (id) => {
         window.confirm("Are you sure to delete?") && 
-          fetch(`/feedback/${id}`, {method: "DELETE"})
+          fetch(`https://feedback-app-database.herokuapp.com/feedback/${id}`, {method: "DELETE"})
           .then(response => response.json())
           .then(() => {
             setFeedback(feedback.filter(item => item.id !== id)) 
           })
       }
   
-      
+
     const addFeedback = comment => {
       comment.id = uuidv4()
-      fetch("/feedback", {
+      fetch("https://feedback-app-database.herokuapp.com/feedback", {
         method: "POST",
         headers: {
           'Content-Type': "application/json"
@@ -49,7 +49,7 @@ export const FeedbackProvider = ({children}) => {
 
 
     const updateFeedback = (id, updItem) => {
-      fetch(`/feedback/${id}`, {
+      fetch(`https://feedback-app-database.herokuapp.com/feedback/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json" 
@@ -64,7 +64,7 @@ export const FeedbackProvider = ({children}) => {
 
 
     const fetchFeedback = () => {
-      fetch("/feedback?_sort=id&_order=desc")
+      fetch("https://feedback-app-database.herokuapp.com/feedback")
       .then(response => response.json())
       .then(data => {
         setFeedback(data)
