@@ -1,5 +1,6 @@
 
 import PropTypes from 'prop-types'
+import AboutLinkIcon from './shared/AboutLinkIcon'
 
 function Header({text, bg, color}) {
 
@@ -13,6 +14,7 @@ function Header({text, bg, color}) {
         <div className="container">
         <h2>{text}</h2>
         </div>
+        <AboutLinkIcon/>
     </header>
   )
 }

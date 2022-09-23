@@ -195,6 +195,9 @@ input:focus {
 /* FIX: Remove position: absolute to keep about icon at the bottom of the
  * document */
 .about-link {
+  position: relative;
+  right: 5px;
+  top: 2px;
   display: flex;
   justify-content: flex-end;
 }
@@ -202,7 +205,7 @@ input:focus {
 /* FIX: Remove position: absolute to keep about icon at the bottom of the
  * document */
 .about-link a {
-  color: #fff;
+  color: rgb(209, 209, 209);
   cursor: pointer;
 }
 

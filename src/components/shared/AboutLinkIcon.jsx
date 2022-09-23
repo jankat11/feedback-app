@@ -7,7 +7,7 @@ function AboutLinkIcon() {
     <div className='about-link'>
         <Link to="/about">
           <FaQuestion
-           size={30}/>
+           size={18}/>
         </Link>
     </div>
   )

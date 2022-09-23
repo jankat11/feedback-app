@@ -6,7 +6,7 @@ import Spinner from "./shared/Spinner"
 
 function FeedbackList() {
 
-    const {feedback, isLoading} = useContext(FeedbackContext)
+    const {feedback, feedbackAll, isLoading} = useContext(FeedbackContext)
 
     if (!isLoading && (!feedback || feedback.length === 0)) 
     return <h2>No feedback yet!</h2>
@@ -28,6 +28,7 @@ function FeedbackList() {
                 </motion.div>
             ))}
             </AnimatePresence>
+            {feedback.length < feedbackAll.length && <Spinner/>} 
     </div>
     )
 }

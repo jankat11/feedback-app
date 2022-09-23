@@ -47,6 +47,7 @@ function FeedbackForm() {
         text
       }
       if(feedbackEdit.edit === true) {
+        newFeedback.timestamp = feedbackEdit.item.timestamp
         updateFeedback(feedbackEdit.item.id, newFeedback)
       } else {
         addFeedback(newFeedback)

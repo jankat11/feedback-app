@@ -5,6 +5,8 @@ const FeedbackContext = createContext()
 
 export const FeedbackProvider = ({children}) => {
     const [feedback, setFeedback] = useState([])
+    const [feedbackAll, setFeedbackAll] = useState([])
+    const [page, setPage] = useState(1)
     const [isLoading, setIsLoading] = useState(true)
     const [feedbackEdit, setFeedbackEdit] = useState({
       item: {},
@@ -13,12 +15,23 @@ export const FeedbackProvider = ({children}) => {
 
     useEffect(() => {
       fetchFeedback()
-    }, [])
+      fetchFeedbackAll()
+    }, [page])
+
+    useEffect(() => {
+      fetchFeedbackAll()
+    }, [feedback])
+    
+    window.onscroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        setPage(page + 1)
+      }
+    }
 
     const editFeedback = item => {
       setFeedbackEdit({
         item,
-        edit: true
+        edit: true,
       })
     } 
 
@@ -34,6 +47,7 @@ export const FeedbackProvider = ({children}) => {
 
     const addFeedback = comment => {
       comment.id = uuidv4()
+      comment.timestamp = Date.now()
       fetch("https://feedback-app-database.herokuapp.com/feedback", {
         method: "POST",
         headers: {
@@ -63,14 +77,25 @@ export const FeedbackProvider = ({children}) => {
     }
 
 
-    const fetchFeedback = () => {
-      fetch("https://feedback-app-database.herokuapp.com/feedback")
+    const fetchFeedbackAll = () => {
+      fetch(`https://feedback-app-database.herokuapp.com/feedback`)
       .then(response => response.json())
       .then(data => {
-        setFeedback(data)
+        setFeedbackAll(data)
+      })
+    }
+    
+
+
+    const fetchFeedback = () => {
+      fetch(`https://feedback-app-database.herokuapp.com/feedback?_sort=timestamp&_order=desc&_page=${page}&_limit=10`)
+      .then(response => response.json())
+      .then(data => {
+        setFeedback([...feedback, ...data])
         setIsLoading(false)
       })
     }
+
 
 
     return (
@@ -79,6 +104,7 @@ export const FeedbackProvider = ({children}) => {
         feedback,
         feedbackEdit,
         isLoading,
+        feedbackAll,
         deleteItem,
         addFeedback,
         editFeedback,

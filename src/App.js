@@ -4,8 +4,6 @@ import FeedbackList from './components/FeedbackList'
 import Header from './components/Header'
 import FeedbackStats from './components/FeedbackStats'
 import FeedbackForm from './components/FeedbackForm'
-
-import AboutLinkIcon from './components/shared/AboutLinkIcon'
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import AboutPage from './pages/AboutPage'
 import {FeedbackProvider} from "./context/FeedbackContext"
@@ -14,7 +12,6 @@ import {FeedbackProvider} from "./context/FeedbackContext"
 
 
 function App() {
- 
 
   window.onclick = e => {
     console.log(e.target)
@@ -32,7 +29,6 @@ function App() {
                 <FeedbackForm />
                 <FeedbackStats/>
                 <FeedbackList/>
-                <AboutLinkIcon/>
                 </>
               }
               />
