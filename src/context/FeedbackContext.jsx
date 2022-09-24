@@ -15,7 +15,8 @@ export const FeedbackProvider = ({children}) => {
 
     useEffect(() => {
       fetchFeedback()
-      fetchFeedbackAll()
+      fetchFeedbackAll() 
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page])
 
     useEffect(() => {
