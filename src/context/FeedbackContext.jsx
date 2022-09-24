@@ -16,19 +16,13 @@ export const FeedbackProvider = ({children}) => {
     useEffect(() => {
       fetchFeedback()
       fetchFeedbackAll() 
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      /* // eslint-disable-next-line react-hooks/exhaustive-deps */
     }, [page])
 
     useEffect(() => {
       fetchFeedbackAll()
     }, [feedback])
     
-    window.onscroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        setPage(page + 1)
-      }
-    }
-
     const editFeedback = item => {
       setFeedbackEdit({
         item,
@@ -45,7 +39,6 @@ export const FeedbackProvider = ({children}) => {
           })
       }
   
-
     const addFeedback = comment => {
       comment.id = uuidv4()
       comment.timestamp = Date.now()
@@ -86,7 +79,12 @@ export const FeedbackProvider = ({children}) => {
       })
     }
     
-
+    function addScroll() {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        setPage(page + 1)
+        window.removeEventListener("scroll", addScroll)
+      }
+    }
 
     const fetchFeedback = () => {
       fetch(`https://feedback-app-database.herokuapp.com/feedback?_sort=timestamp&_order=desc&_page=${page}&_limit=10`)
@@ -95,10 +93,10 @@ export const FeedbackProvider = ({children}) => {
         setFeedback([...feedback, ...data])
         setIsLoading(false)
       })
+      .then(() => window.addEventListener("scroll", addScroll))
     }
 
-
-
+    
     return (
       <FeedbackContext.Provider
       value = {{
